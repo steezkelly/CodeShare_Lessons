@@ -1,0 +1,229 @@
+﻿# Are you there steve?
+# Hello Mike! :D
+
+#generic(args 1, args 2): 
+# generic(pass_in 1, pass_in 2)
+
+# Let's do something useful like write a string backwards
+# First off, do you know what a string is?
+
+str("Hello World")
+
+#(::-1) <- is that how you reverse an index/list?
+# maybe that's some fancy black magic way of doing it idk, let's keep things simple
+#sounds good :P}
+
+stringToReverse="Hello world"
+
+# Function we'll call to reverse our string
+def steveAndMikeReverse(stringToReverse):
+  
+  # 1. stringToReverse="hi" 2. stringToReverse="i" 3b. stringToReverse="i" 4b. stringToReverse="i" 3. stringToReverse="" 4. stringToReverse="" .............. are we trapped? #Ad infinitum, infinite "" yep yep S: We must exit the recursion using <break>? Yes, how do we exit in code? 
+  # S: I've seen break used❌, return perhaps << yes? In this case break won't do anything, because we're not inside a for/while loop. Why are we stuck in an infinite recursion? Well because we keep calling recursion. S: We need to evaluate when len is 0 << yep
+  #S: How to evaluate when "" is reached/index[0] is reached? Do we care about the index at this point? S:Since we are finished, no we don't care where we are at in the stringToReverse. M: Exactly. Ask yourself this. What's steveAndMikeReverse("A")? S:"A"
+  #M: What's steveAndMikeReverse("")? S: ""? Yes, What's steveAndMikeReverse(<any 1 character string>)? S: "<any 1 character string>" M: Spot on. So do we need to do all of the firstLetter, lastLetter shit? S: Nope, we need to simply return the result
+  #M: Exactly. Code it
+  
+  return steveAndMikeReverse(stringtoReverse) < ? ?  Let's go back to iteration 2, > 2. return steveAndMikeReverse("i"), let's evaluate steveAndMikeReverse("i") > "i" 3b. return steveAndMikeReverse("i"), let's evaluate steveAndMikeReverse("i") 4b. retrunSteveAndMikeReverse("i"), let's evaluateSteveAndMikeReverse("i") > "i"
+   #S: Okay, so we're stuck with returning "i" if we do return steveAndMikeReverse(stringToReverse), yep exactly. What should we really be returning? S: stringToReverse >> yes!
+   #S: So, okay. Let's def the function again belowVVVV for cleanness
+   
+   #Well, "hi" would be easy to solve. Let's change to "hello", and put that variable declaration outside of the function! don't want to override user's inputs
+   stringToReverse = "hello"
+   
+   def steveAndMikeReverse(stringtoReverse):
+   		
+    	firstLetter=stringToReverse[0]	# 1. "h"
+    	lastLeters=stringToReverse[1:]	# 1. "ello"
+      
+    	#S: something is missing here I believe. reversedString = lastLetters + firstLetter #M: We lost all of our recursion we were doing earlier! S: Okay, so no need for that?❌ M: We still want that, remember when we decided it was okay to return stringToReverse
+      #S: <It was okay to return stringToReverse when we encountered a blank string, or "">, M: actually it was when we encountered ANY 1 letter string, right? S: That's right	M: When the LENGTH of the string is 1 S: Ah yes okay. How to evaluate, if statement?
+      #if stringToReverse == len(1): ?, > (on last call) if "h" == len(1) > if "h" == 1 > false, M: what are you trying to get the length of? S:Length of the range of the string, so range(len(stringToReverse)) would be more correct
+      #																																																																																							  ^^ range( len("h") ) > range( 1 ) > [1], is that S: Right, range makes a list, M: you just want the number, right?
+      #																																																																																								S: Yes, we just want to evaluate when it is a one-character string
+      #																																																																																								M: So we want the length of the string? And we want to see when the LENGTH is 1?
+      # S: We want to see when we are done reversing the string, by checking length to see if we completed reversal. Now, if that's the case (if range(len(firstLetter)) == range(len(lastLetters))) >nonono, I don't think that's what we want.>❌
+      # M: What do we want here? We want to know if [the length of the string we're reversing] is [one character], in which case we know the reversal, it's just that one character
+      # M:													 
+      # S: Ok, I think I'm getting lost with where we are storing the reversed string.
+      # M: We have two things we know. 1. The recursion will get us what we want, BUT it gets caught in an infinite cycle, 2. We KNOW the reversal of a length 1 string is just the length 1 string itself
+      # M: We need to check if the string has a length of 1, and if and only if it does, we return stringToReverse without doing recursion. 
+      # M: How do we determine the length of a string? Well that's just len(string). So to check if the length of a string is 1, we write len(string) == 1. 
+      # M: Notice we don't need range here, because there's no need for a list. S: We don't need a list for a one-character string, but do we need a list for multiple-character strings? M: If we wanted to know if the length of the string was 5, we still wouldn't need a list
+      # M: We would just write len(string) == 5. Len(string) -> <number representing the length of <string>>
+      #S: Okay, so a list does this ["h","e","l","l","o"], no actually calling range(string) > <ERROR> > [1,2,3,4,5] >> yes! or [1,2,3,4,5], S:Okay, I'll accept that. Haha M: range("hellO") > <ERROR>, range(5) > [1,2,3,4,5]. It needs a number. S:Ahhhhhh and len("hello") = 5 >> yep
+     #S: "Okay that makes sense, cannot evaluate a True/False with a string and integer", yep
+     # M: Okay, we're missing just 1 line to complete our function. What do we return when the length of the string is greater than 1?
+     
+   		if len(stringToReverse) == 1:			M: Ah, yes exactly right!! 
+        return stringToReverse					# 1. 
+      else:
+        return steveAndMikeReverse(lastLetters) + firstLetter #S: That seems to be solution we worked out earlier M: yes!! this is done and it works S: So, this won't get stuck in an infinite recursion because as we iterate through the last letters--	
+        #																																																																						 ^M: We'll stop when we hit the last letter, aka the string of length 1, let's write it out again for cleanliness S:How is this storing into stringToReverse? M: Let's go thorugh an example.
+      
+      	# ❌reversedString = lastLetters + firstLetter					# I'd point you to earlier where we found this doesn't work, but I don't know where it is down there lol
+        # ❌return reversedString                              # ^S: Thanks again for going through this with me in such detail Mike, really appreciate it. M: NP we are very close, it's just the solution we worked out earlier. S:I'll look through real quick and see.
+      	# ❌return steveAndMikeReverse(stringToReverse) <- S:??? or would we be getting ourselves into a loop M: We'd get ourselves into an inf cycle. Weren't we doing something with firstLetter and lastLetters before? 
+        																																																																						^ #S: Yeah, we'd need the reversedString = lastLetters + firstLetter
+      # ^ else works, becuase if it's not 1, it's going to be greater than 1 (never going to be negative or 0)
+   		#I was worried about base case string le						M: Good to be worried, "" has a length of 0. 
+   #Output per recursion: "ello" + "h"> "llo" + "eh" > "lo" + "leh" > "o" + "lleh" > "olleh"
+   # ^^ this is right, let's run through just the first pass of the function. stringToReverse is "hello" S: "ello" + "h"
+   # 
+   
+   stringToReverse="hi"																#M: With me down here? S: Yeah, I wrote it down at the bottom of this page.
+   def steveAndMikeReverse(stringToReverse):
+    	firstLetter=stringToReverse[0]	# 1. 
+    	lastLeters=stringToReverse[1:]	# 1. 
+      
+      if len(stringToReverse) == 1:			
+        return stringToReverse				# 1. 
+      else:
+        return steveAndMikeReverse(lastLetters) + firstLetter		#1. 
+   
+  firstLetter=stringToReverse[0]		# First letter in the string 		> 1. What's firstLetter here? "h" 2. WHat's firstLetter here? "i" <only letter> 3. What's firstLetter here? S: ""
+  lastLetters=stringToReverse[1:]		# Last letters in the string #from place 1 to end (Yes!) > 1. What's lastLetters here? "i" 2. "" What's lastLetters here? "i"?❌ nope, it's blank. there are no lastLetters. S: Ahhh, makes sense " "❌, M: except no space just ""
+  																																													# > 3. What's lastLetters here? S: "" 
+  #Is this where we want to be at with this return function Mike? That's right, but there's something missing that will become obvious once we test. S: I assume we need the reversedString❌ no this is fine how it is
+  return steveAndMikeReverse(lastLetters) + firstLetter # > 1. return steveAndMikeReverse("i") + "h", we'll now evaluate steveAndMikeReverse("i") 2. return steveAndMikeReverse("") + "i", we'll now evaluate steveAndMikeReverse("") 3. return steveAndMikeReverse("") + "", we'll now evaluate steveAndMikeReverse("")
+  #
+# M: Let's test with the word "hi"
+#
+# 1. stringToReverse = "hi"
+# print( steveAndMikeReverse("hi") )
+# > (inside steveAndMikeReverse)
+# > (lets writ this in the function iteslf)
+#
+  
+  # What would this give us?
+  #Let me ask a question real quick.... [1:] reverse it already? no need to put a step:end? [1:1:10] Okay i saw on a thread on StackExchange, Gotcha gotcha
+  # I'm not familiar with that triplet of indices in python... all i know is [<start>:<end>] 					^^ it's probably some fancy pants shortcut of doing it, but for these purposes i'll pretend it doesn't exist
+  #return lastLetters+firstLetter	# "ello worldH"... not quite right
+  
+  # So we know that the first letter needs to go to the end of the string, for sure. So we have <rest of string> + <first letter>. And we know that <rest of string> needs to also be reversed, because otherwise we get
+  #																																																																	^^ ello WorldH. How do we reverse the rest of the string? Fucking magic!  S:Hahaha
+  																																																																 									^^ We have a function that will reverse a string, that we're making now. 
+  reversedString = ___ + firstLetter # What goes in the ___?? Ask questions!
+  # I think you can answer this now ^^ 
+  #S: Let me take a crack at it with the confusion: we want to put in reversedString wow what *mindblown* Okay, hmm we want to put in steveandMikeReverse(lastLetters)? FUCK YES S: Okay sweet, lastLetters is <1:> index 1 to end of stringToReverse - yes
+  # M: Fuck Yes! Oh, not quite not quite. Not reversedString the variable, we want <lastLetters, but reversed>							^^ closer closer, so stringToReverse is "Hello world", so steveAndMikeReverse("Hello world") + "H"
+  #																																																													^^ would give use "dlrow olleH" + "H" -> "dlrow olleHH" S: Okay, guide me a bit more my brain is still a bit confused
+  # M: we have ___ + firstLetter, which at this point is ___ + "H". With me? 			S: Makes sense					M: your first suggestion was reversedString + "H", what would that give us? At this point reversedString="", so ""+"H" is just "H" S:Ok..																																																			
+  # M: So that would look like reversedString = reversedString + firstLetter > reversedString = "" + "H" > reversedString = "H", and we'd return "H"! Which would be wrong.
+  #S: If we pass in lastLetters, as the blank wouldn't that just be "ello World" + "H", oh wait a second. It's sort of hitting me a bit. So each time we do it, it does "llo World" +"eH" well, not exactly but I think that's what we need it to do.
+  # M:																														^ Yes :) 																									^ FUCK YES DUDE, yeah that's the right idea here
+  # M: Okay, so we know we can't just return reversedString = lastLetters + firstLetter, as you said, it'd be "ello World" + "H"
+  # M: Your second suggestion was to do reversedString = steveAndMikeReverse(stringToReverse) + firstLetter > reversedString = steveAndMikeReverse("Hello World") + "H" > What would reversedString be in this case? S: I mean, wouldn't that be "ello WorldHH"
+  #																																																														 ^^ what does steveAndMikeReverse("Hello World") return, assuming that it's working correctly?
+  #																																																															^^S: We would hope and assume it would return "dlroW olleH" M: Yep, so then what's that + "H" S: "dlrow olleHH"
+  #																																																															^^M: Exactly, and that's not quite what we want. What would we pass to steveAndMikeReversal to get the right final answer? 
+  #																																																															^^S: We would need to drop firstLetter, so reversedString = lastLetters hmmmmmmmm.....
+	# M: We're very close. reversedString = steveAndMikeReverse(...) + "H". How do we make this give us "dlrow olleH" by filling in ...?
+  # S: We'd pass in lastLetters into steveAndMikeReverse > steveAndMikeReverse(lastLetters) + firstLetter > return steveAndMikeReverse(lastLetters) + firstLetter ?
+  # M: Fuck yeah dude. 																			^^ And. Fini. S: Huh															^^ Watch your parentheses			Yes, yes. Okay let's write that in the code.
+  
+  
+  #									^^ Hmm we have the for loop down there that would give the result, however we would need to start at index 11 and go to index 1 (leaving index 0 alone as that's the first letter)
+	#																																								^^ True, true. But, what about the function we're writing right now? What does that do
+  #																																																																											^^It will concatenate ___ and firstLetter (which is index 0 or "H"), the blank should that be lasLetters?	
+  #																																																																												^^ Without getting into the details, what does our reverse(stringToReverse) function do?
+  #																																																																												^^I understand, we are tryin to make "dlrow olleH", okay let me look #def reverse(stringToReverse):
+  #																																																																												^^ I think maybe I'm making the question too complicated. reverse(stringToReverse) reverses a string!
+  #																																																																					S: We are trying to accomplish a reversal of the string we input as an argument I forget we had a def Method above
+  #																																																																													M: Exactly! Function == Method btw. A method is a function that can only be called for a certain class.
+  #																																																																						S: Ah okay! Java from UNH made me think like that I believe, OOP <- Okay I see
+  #																																																																						M: Yeah, Python has methods too once you get into classes. Mhm. Python is OOP. SO what goes in the ___.... Hmmm
+  #																																																																							^^ Let's backtrack. We want reversedString = <rest of string, reversed> + <first letter>
+  #																																																																							^^ AND we know that our function that we're creating will eventually reverse the input string (once its finished)
+  # So we should get a list for the index of each character? I'll let you explain... Right right V                                  VAhh that seems a bit easier to visualize
+  #																														M: Right now we have firstLetter and lastLetters, and we want to do (reverse of lastLetters) + first letter, well it so turns out that we HAVE a function to reverse lastLetters,
+  #																																																																							^^ it's called steveAndMikeReverse(...), so to get (reverse of lastLetters), we call steveAndMikeReverse(lastLetters)
+  #																																																																							^^That's very nice of Python to give built-in haha <- Oh right right, we're defining the function "reverse"
+  #																																																																							 ^^ M: whoops i've caused confusion. Here I'll rename our function. steveAndMikeReverse. 
+  #	M: The way to get confused about this is to think about what steveAndMikeReverse is actually doing, instead of just what it's supposed to give us. It's supposed to give us a reversal of the input string. We'll trust that it does that.
+  # M: With me so far?
+  # S: I believe so
+  # M: Okay, let's back up to reiterate. We're building a reversed string. The first letter goes at the end, we know that. But we don't want "ello World" + "H", that's not right. We want "dlroW olle" + "H". 
+  #																																																												^^ How do we turn "ello World" into "dlroW olle"? S: #		reverseI = len(stringtoReverse) - i <- Is that what we need? 
+  #                                                                                                                                                                         S: hahah I don't know recursion.
+  #																																																																																					 ^^ Cheating again I see, using the iterator!
+  #																																																																																					M: Do we have a function to reverse a string?
+  #																																																																																					M: Of course we do, we're building it right now! S: Figures, what can we do to reverse not iteratively?
+  #																																																																																					M: We call the function we're building as we speak, steveAndMikeReverse(<input string>) -> <input string reversed>
+	#																																																																																						
+  # S: Okay, so when we call steveAndMikeReverse(<input string>). Hmm, my head. VYes sir
+	# M:																								^^ Stop right there. Don't think about what it actually does, it'll be immensely confusing. 
+  #																												Only think about what it's supposed to do, which is reverse a string. 
+  #																											 Recursion is not the way humans are supposed to think, the only way to understand recursion is to think about 1 thing at a time... if that makes sense. 
+  #	S: "1 thing at a time", hmm okay. I'm trying to wrap my head around it, so I get we're defining a function and are going to call the function inside the function itself.
+  #	M: Yep, and why? Well, we happen to need to reverse a string inside of our string reversing function. It's beautiful, really. Beautifully simplistic. Let's write out the solution.																																																																
+  #
+  # Do you have any ideas for what we should do to make this give us the right output? (hint: recursion!) <-Wooo! Time to learn how
+  #Let me take a stab at it.... so what we want is "dlrow olleH", we have to iterate backwards right? -1 goes in there somewhere is all I know
+  
+  #		ITERATIVELY																																																^^ so we could do it iteratively, with a for loop, but we can also do this with recursion
+  #	for i in range(len(stringToReverse)):
+  #		reverseI = len(stringtoReverse) - i		# <last letter index>, <second to last letter index>, ....
+  #		reversedString = reversedString + stringToReverse[reverseI]
+  #
+  #	So here's a for loop that could get you there, any questions on that?
+  # ^ What does the output look like for that? -i starts at index 0, then -1, -2, etc...? so len(stringToReverse) is let's say 11: 11, 10, 9, 8, etc..?? Am I on the right track
+  # 																																																							^^ Exactly rijght											^^ Yep, I think you understand how to make the for loop
+  #	 																																																							^^ I have to ask now about why range(len()) <- What is the purpose of range in Python? Why not just len()
+  #																																																									^^ range(num) is a function that outputs a list -> range(5) -> [0,1,2,3,4]
+  #																																																																														^^okay I see, lists are important ✅
+  #																																																																															^^ for is an iterator, and a list is something an iterator can use. aka it's "iterable"																																																																																				
+  #																																																																																^^An iterator just looks at every element in any "iterable" object
+  # Are dictionaries iterable?			Yes! The iterator will look at all keys in the dictionary
+  # Okay, ready for recursion?
+  # S: Yes sir, hold on though. Don't we need to return the reversed string in the above loop? M: The for loop gives us a complete solution without needing to use recursion. I've commented it out, and wrote it only because you asked if we could use a for loop :)
+  # S: Okay perfect, I see now that we do put the new result in the String : reversedString. # reversedString = reversedString + stringToReverse[reverseI] <- that is storing each iteration of the for loop right until we hit end of range(len)? Sorry for many questions
+  #																																^^ reversedString is already a string :D 																										^^ yep, on each iteration we're adding 1 more letter to reversedString		S: Awesome! Arigatou															
+  
+  
+  #RECURSIVELY
+   #Voila, check above for lecture notes with the great Mike Albert, and student Steve Kelly.
+  stringToReverse="hi" #M: going with "hi" S: sounds good
+  #M: I'll let you fill out the numbers
+  
+  def steveAndMikeReverse(stringToReverse)
+  	
+    #stringToReverse: > 1. "hi" 2. "i"  M: Excellent nope nope nope, we didn't pass in the "h", look below, we just passed in the "i" S: We don't have to set lastLetters to stringToReverse to pass it in as an argument? 
+    #M: The function doesn't know about the "h" the second time around, it doesn't care. The function is just reversing what you told it to reverse. 
+    #S: Because firstLetters isn't passed in as an argument into steveAndMikeReverse() in the else statement, only lastLetters is passed in.       #M: yep, steveAndMikeReverse knows nothing about the previous "firstLetter"                                                                                                     
+  
+ 		firstLetters = stringToReverse[0]		# > 1. "h" 2. "i"
+  	lastLetters = stringToReverse[1:]		# > 1. "i" 2. ""	#M: 2. is wrong S: "" is correct, as its outside of the index of "i" <[0,1] > "" is [1:] M: actually just [0] but yeah right idea S: That makes sense, no need for an index of [1] nothing is stored there. Yes
+  
+ 	 if len(stringToReverse) == 1:				# > 1. len(stringToReverse) == 1 > false 2. true 
+ 		 	return stringToReverse						# > 2. "" S:It's blank❌ M: Hint we wrote it up above, it's not blank S: Okay we'd have to return "i"/firstLetter M:"i" is right  M: it's just returning stringToReverse, nothing to do with firstLetter.
+      # ^ what is this doing? it's returning the value stringToReverse, which at this point is "i" S: because of the argument we passed in on step 1, which was lastLetter> "i". So, now the function is done?
+      # M: Yes and yes, the second call (2.) of the function is done. Where does that leave us? Well, now we know what calling steveAndMikeReverse("i") returns, just "i" S: OH, the "h" has already been appended	
+      #M: that's the right idea, although technically we evaluated steveAndMikeReverse("i") before we appended the "h" #S: Due to the run time of the compiler?  M: Nope, we're just following steps in order S:Makes me think of PEMDAS
+  		#M: Yeah it's sort o flike PEMDAS. You need to evaluate things in parentheses first, sort of like you need to evaluate a function call before you do the outer operation
+      #M: In the first return statement, we had a list of things to do, 1. evaluate steveAndMikeReverse("i") 2. Append "h" S: Now that the second pass is done, would there be a third pass to evaluate or is our function closed?
+      #M: I mean we did return steveAndMikeReverse("i") + "h" > return "i" + "h" > return "ih", so we're done
+      #S: It's starting to make sense why this works, we are no longer calling the function and have returned a result. We only call the function when length is more than 1.
+      #M: Yep, exactly. And each function call doesn't care about anything else that's happening. It just returns what it's supposed to.
+      #S  I get why recursion works. Can recursion replace iteration in most/all cases? M: Anything that can be written iteratively can be written recursively, and anything that can be written recursively can be written iteratively.
+      #M: Some solutions are more elegant when written recursively, like this solution that could really be written in 2 lines.
+      #S: How could we write this in 2 lines? If you have the time, Mike. Again thank you for all your help with understanding this, brought back quite a lot and learned a lot working with you ^^.
+    else:
+  		return steveAndMikeReverse(lastLetters) + firstLetters	# > 1. steveAndMikeReverse("i") == "i" (from 2.) + "h" M: we know what lastLetters is S: "i" is lastLetters and firstLetters is "h", M: let's go step by step. first, plug in the values for lastLetters and firstLetters
+      #S: So, that's the first step 1..
+      #M:																																	^Good, good. Oh look we're calling steveAndMikeReverse with "i" passed in. Now we step into the function again, and we've been denoting that with 2. 
+      #S: Second step 2., we arrive at
+      
+      
+      
+      
+#M: Some solutions are more elegant when written recursively, like this solution that could really be written in 2 lines.
+#S: How could we write this in 2 lines?
+
+def steveAndMikeReverse2Line(stringToReverse):
+	if len(stringToReverse)==1 return stringToReverse
+  return steveAndMikeReverse2
+
+#S: Wow, that's it? No need to pass in an arg to steveAndMikeReverse?
+      
+      
